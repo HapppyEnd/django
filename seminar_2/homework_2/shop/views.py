@@ -12,12 +12,11 @@ def index(request):
 
 def get_clients(request):
     clients = Client.objects.all()
-    res = '<br>'.join([str(client) for client in clients])
-    return HttpResponse(res)
+    return render(request, 'clients.html', {'clients': clients})
 
 
 def get_client(request, pk):
-    client = Client.objects.filter(pk=pk).first()
+    client = Client.objects.filter(pk=pk)
     return HttpResponse(client)
 
 
