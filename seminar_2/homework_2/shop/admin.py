@@ -4,12 +4,12 @@ from shop.models import Client, Order, Product
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'phone_number', 'address',)
+    list_display = ('name', 'email', 'phone_number', 'address', 'registered')
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'price', 'count')
+    list_display = ('name', 'description', 'price', 'count', 'added')
 
 
 @admin.register(Order)

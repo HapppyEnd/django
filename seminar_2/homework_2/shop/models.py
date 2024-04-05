@@ -11,6 +11,11 @@ class Client(models.Model):
     address = models.TextField('Address', blank=True, null=True)
     registered = models.DateTimeField('Registered', auto_now_add=True)
 
+    class Meta:
+        verbose_name = 'Client'
+        verbose_name_plural = 'Clients'
+        ordering = ('-registered',)
+
     def __str__(self) -> str:
         return f'{self.name}, {self.email}, {self.phone_number}'
 
@@ -24,6 +29,11 @@ class Product(models.Model):
     count = models.PositiveIntegerField('Number of products', default=1)
     added = models.DateTimeField('Product added', auto_now_add=True)
 
+    class Meta:
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
+        ordering = ('-added',)
+
     def __str__(self):
         return self.name
 
@@ -31,14 +41,16 @@ class Product(models.Model):
 class Order(models.Model):
     client = models.ForeignKey(
         Client, verbose_name='client', on_delete=models.CASCADE)
-    product = models.ManyToManyField(
+    products = models.ManyToManyField(
         'Product', verbose_name='Products')
     total_amount = models.DecimalField(
         'Total amount', max_digits=10, decimal_places=2, default=0)
     created = models.DateTimeField('Created', auto_now_add=True)
 
+    class Meta:
+        verbose_name = 'Order'
+        verbose_name_plural = 'Orders'
+        ordering = ('-created',)
+
     def __str__(self) -> str:
         return f'{self.client}, {self.total_amount}, {self.created}'
-
-    class Meta:
-        ordering = ('client',)
