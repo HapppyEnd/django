@@ -27,6 +27,7 @@ class Product(models.Model):
         'Price', max_digits=8, decimal_places=2,
         validators=[MinValueValidator(limit_value=Decimal(0.1))])
     count = models.PositiveIntegerField('Number of products', default=1)
+    image = models.ImageField(upload_to='images/')
     added = models.DateTimeField('Product added', auto_now_add=True)
 
     class Meta:
