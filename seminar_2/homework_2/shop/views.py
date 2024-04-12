@@ -9,7 +9,9 @@ from shop.models import Client, Order, Product
 
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html', context={
+        'products': Product.objects.all()
+    })
 
 
 def get_clients(request):
@@ -59,7 +61,7 @@ def client_products(request, pk: int, days: int):
 
 
 def product(request, pk: int):
-    product = Product.objects.filter(pk=pk)
+    product = Product.objects.get(pk=pk)
     return render(request, 'product.html', {'product': product})
 
 

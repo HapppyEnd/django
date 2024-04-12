@@ -4,10 +4,10 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY', 'asadadsa')
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
@@ -59,15 +59,8 @@ WSGI_APPLICATION = 'homework_2.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'HapppyEnd$default',
-        'USER': 'HapppyEnd',
-        'PASSWORD': os.getenv('MYSQL_PASSWORD'),
-        'HOST': 'HapppyEnd.mysql.pythonanywhere-services.com',
-        'OPTIONS': {
-            'init_command': "SET NAMES 'utf8mb4';SET sql_mode='STRICT_TRANS_TABLES'",
-            'charset': 'utf8mb4',
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
