@@ -1,16 +1,18 @@
 # flake8: noqa
-
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-s31s+++uub^$^5r*2^p*i%iimif31gzyh*#_f7ch01a)_v=gg4'
-
-DEBUG = True
+SECRET_KEY = os.getenv('SECRET_KEY')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
+    'HapppyEnd.pythonanywhere.com',
 ]
 
 
@@ -57,8 +59,15 @@ WSGI_APPLICATION = 'homework_2.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'HapppyEnd$default',
+        'USER': 'HapppyEnd',
+        'PASSWORD': os.getenv('MYSQL_PASSWORD'),
+        'HOST': 'HapppyEnd.mysql.pythonanywhere-services.com',
+        'OPTIONS': {
+            'init_command': "SET NAMES 'utf8mb4';SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8mb4',
+        },
     }
 }
 
@@ -78,7 +87,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -88,6 +97,7 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR/'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
 
